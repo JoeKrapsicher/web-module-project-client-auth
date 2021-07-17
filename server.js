@@ -60,16 +60,19 @@ function authenticator(req, res, next) {
   }
 }
 
+// this means that the auth request should have a body in the format: 
+// {username: '', password: ''}
+
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   if (username === 'Lambda' && password === 'School') {
     req.loggedIn = true;
-    res.status(200).json({
+    res.status(200).json({ // Success Create Happiness
       payload: token
     });
   } else {
     res
-      .status(403)
+      .status(403) // Sad Path
       .json({ error: 'Username or Password incorrect. Please see Readme' });
   }
 });
